@@ -19,7 +19,16 @@ public class Controller implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (Event.valueOf(e.getActionCommand())) {
-		
+		case ADD_WORD:
+			addWord();
+			break;
 		}
+		mainWindow.paintTree(tree.getRoot());
+		mainWindow.revalidate();
+		mainWindow.repaint();
+	}
+
+	private void addWord() {
+		tree.addChildToRoot(mainWindow.getTextToEnter(), tree.getRoot());
 	}
 }

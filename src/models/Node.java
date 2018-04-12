@@ -30,6 +30,6 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return "Node [information=" + information + "]";
+		return information;
 	}
 }
