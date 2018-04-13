@@ -23,6 +23,24 @@ public class Node {
 	public String getInformation() {
 		return information;
 	}
+	
+	public Node getNodeByInformation(String information){
+		for (Node node : nodeList) {
+			if (node.getInformation().equals(information)) {
+				return node;
+			}
+		}
+		return null;
+	}
+	
+	public boolean searchNodeByInformation(String information){
+		for (Node node : nodeList) {
+			if (node.getInformation().equals(information)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void setInformation(String information) {
 		this.information = information;

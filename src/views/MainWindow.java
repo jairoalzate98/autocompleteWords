@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import controllers.Controller;
 import controllers.Event;
@@ -19,7 +20,9 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField jtfWord;
 	private JTree jTree;
+	private DefaultTreeModel modelRoot;
 	private DefaultMutableTreeNode model;
+	private JScrollPane jsTree;
 
 	public MainWindow(Controller controller) {
 		setTitle("AutoCompleteWords");
@@ -33,18 +36,21 @@ public class MainWindow extends JFrame {
 		jbtnAddWord.addActionListener(controller);
 		add(jbtnAddWord, BorderLayout.SOUTH);
 		model = new DefaultMutableTreeNode();
-		jTree = new JTree(model);
-		add(new JScrollPane(jTree), BorderLayout.CENTER);
+		modelRoot = new DefaultTreeModel(model);
+		jTree = new JTree(modelRoot);
+		jsTree = new JScrollPane(jTree);
+		add(jsTree, BorderLayout.CENTER);
 		setVisible(true);
 	}
 	
 	public void paintTree(Node root) {
-		model.removeAllChildren();
 		DefaultMutableTreeNode uiRoot = new DefaultMutableTreeNode(root);
+		modelRoot.setRoot(uiRoot);
 		model.add(uiRoot);
 		for (int i = 0; i < root.getNodeList().size(); i++) {
 			createNode(uiRoot, root.getNodeList().get(i));
 		}
+		
 		revalidate();
 		repaint();
 	}

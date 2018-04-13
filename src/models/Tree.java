@@ -10,9 +10,13 @@ public class Tree {
 	
 	public void addChildToRoot(String word, Node actual){
 		if (!word.isEmpty()) {
-			Node newNode = Tree.createNode(word.substring(0, 1));
-			actual.addNode(newNode);
-			addChildToRoot(word.substring(1, word.length()), newNode);
+			if (!actual.searchNodeByInformation(word.substring(0, 1))) {
+				Node newNode = Tree.createNode(word.substring(0, 1));
+				actual.addNode(newNode);
+				addChildToRoot(word.substring(1, word.length()), newNode);
+			}else{
+				addChildToRoot(word.substring(1,  word.length()), actual.getNodeByInformation(word.substring(0, 1)));
+			}
 		}
 	}
 
