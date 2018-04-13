@@ -2,11 +2,13 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import models.Tree;
 import views.MainWindow;
 
-public class Controller implements ActionListener{
+public class Controller implements ActionListener, KeyListener{
 
 	private Tree tree;
 	private MainWindow mainWindow;
@@ -30,5 +32,18 @@ public class Controller implements ActionListener{
 
 	private void addWord() {
 		tree.addChildToRoot(mainWindow.getTextToEnter(), tree.getRoot());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 	}
 }

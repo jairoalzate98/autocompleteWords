@@ -30,6 +30,7 @@ public class MainWindow extends JFrame {
 		setExtendedState(MAXIMIZED_BOTH);
 		jtfWord = new JTextField(30);
 		jtfWord.setBorder(BorderFactory.createTitledBorder("Ingrese la palabra"));
+		jtfWord.addKeyListener(controller);
 		add(jtfWord, BorderLayout.NORTH);
 		JButton jbtnAddWord = new JButton("Aceptar");
 		jbtnAddWord.setActionCommand(Event.ADD_WORD.toString());
