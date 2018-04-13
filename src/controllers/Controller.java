@@ -40,7 +40,7 @@ public class Controller implements ActionListener, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
+		
 	}
 
 	@Override

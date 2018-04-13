@@ -6,12 +6,22 @@ public class Node {
 	
 	private String information;
 	private ArrayList<Node> nodeList;
+	private int value;
 	
 	public Node(String information) {
 		this.information = information;
 		nodeList = new ArrayList<>();
+		value = 0;
 	}
 	
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue() {
+		value++;
+	}
+
 	public void addNode(Node node){
 		nodeList.add(node);
 	}
@@ -48,6 +58,6 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return information;
+		return information + " -> " + value;
 	}
 }
