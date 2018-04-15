@@ -23,6 +23,10 @@ public class Node {
 	public int getValue() {
 		return value;
 	}
+	
+	public void setValueForList(int value){
+		this.value = value;
+	}
 
 	public void setValue() {
 		value++;

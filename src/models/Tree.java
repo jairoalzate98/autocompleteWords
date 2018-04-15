@@ -57,7 +57,20 @@ public class Tree {
 		return t;
 	}
 	
-	public void getStringAfter(Node n){
-		
+	public ArrayList<String> getStringAfter(Node n){
+		ArrayList<String> texts = new ArrayList<>();
+		if (n.getNodeList().isEmpty()) {
+			return null;
+		}else{
+			ArrayList<Node> nodes = n.getNodeList();
+			for (Node node : nodes) {
+				ArrayList<String> a = getStringAfter(node);
+				for (String string : a) {
+					string = n.getInformation() + string;
+				}
+				texts.addAll(a);
+			}
+		}
+		return texts;
 	}
 }
