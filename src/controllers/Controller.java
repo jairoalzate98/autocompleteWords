@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
+import models.Node;
 import models.Tree;
 import views.MainWindow;
 
@@ -32,6 +34,7 @@ public class Controller implements ActionListener, KeyListener{
 
 	private void addWord() {
 		tree.addChildToRoot(mainWindow.getTextToEnter(), tree.getRoot());
+		mainWindow.setJtfWord();
 	}
 
 	@Override
@@ -40,10 +43,20 @@ public class Controller implements ActionListener, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (!tree.getRoot().getNodeList().isEmpty()) {
+			String text = mainWindow.getTextToEnter();
+			ArrayList<Node> nodes = tree.getWords(text, tree.getRoot().getNodeList());
+			ArrayList<String> texts = new ArrayList<>();
+			for (Node node : nodes) {
+				texts.add(tree.getStringBefore(node));
+			}
+			mainWindow.setModel(texts);
+			mainWindow.revalidate();
+			mainWindow.repaint();
+		}
 	}
 }

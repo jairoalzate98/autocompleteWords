@@ -1,26 +1,19 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Tree {
 	
 	private Node root;
-	private String text;
 	
 	public Tree(String text) {
-		root = Tree.createNode(text);
+		root = Tree.createNode(text, null);
 	}
 	
-	public void setText(String letter){
-		text += letter;
-	}
-	
-	public String getText() {
-		return text;
-	}
-
 	public void addChildToRoot(String word, Node actual){
 		if (!word.isEmpty()) {
 			if (!actual.searchNodeByInformation(word.substring(0, 1))) {
-				Node newNode = Tree.createNode(word.substring(0, 1));
+				Node newNode = Tree.createNode(word.substring(0, 1), actual);
 				actual.addNode(newNode);
 				addChildToRoot(word.substring(1, word.length()), newNode);
 			}else{
@@ -30,12 +23,41 @@ public class Tree {
 			}
 		}
 	}
-
+	
 	public Node getRoot() {
 		return root;
 	}
 	
-	public static Node createNode(String information){
-		return new Node(information);
+	public static Node createNode(String information, Node father){
+		return new Node(information, father);
+	}	
+	
+	public ArrayList<Node> getWords(String word, ArrayList<Node> nodes){
+		for (Node node : nodes) {
+			if (word.length() <= 1) {
+				if (node.getInformation().equals(word)) {
+					return node.getNodeList();
+				}
+			}else{
+				if (node.getInformation().equals(word.substring(0, 1))) {
+					return getWords(word.substring(1, word.length()), node.getNodeList());
+				}
+			}
+		}
+		return nodes;
+	}
+	
+	public String getStringBefore(Node n){
+		String t = n.getInformation();
+		Node actual = n;
+		while(actual.getFather() != root){
+			t = actual.getFather().getInformation() + t;
+			actual = actual.getFather();
+		}
+		return t;
+	}
+	
+	public void getStringAfter(Node n){
+		
 	}
 }

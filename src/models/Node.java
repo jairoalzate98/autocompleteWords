@@ -7,13 +7,19 @@ public class Node {
 	private String information;
 	private ArrayList<Node> nodeList;
 	private int value;
+	private Node father;
 	
-	public Node(String information) {
+	public Node(String information, Node father) {
 		this.information = information;
+		this.father = father;
 		nodeList = new ArrayList<>();
 		value = 0;
 	}
 	
+	public Node getFather() {
+		return father;
+	}
+
 	public int getValue() {
 		return value;
 	}

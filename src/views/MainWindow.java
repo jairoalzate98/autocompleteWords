@@ -29,8 +29,8 @@ public class MainWindow extends JFrame {
 	private DefaultTreeModel modelRoot;
 	private DefaultMutableTreeNode model;
 	private JScrollPane jsTree;
-	private JList<Node> nodeList;
-	private DefaultListModel<Node> modelList;
+	private JList<String> nodeList;
+	private DefaultListModel<String> modelList;
 
 	public MainWindow(Controller controller) {
 		setTitle("AutoCompleteWords");
@@ -52,13 +52,13 @@ public class MainWindow extends JFrame {
 		add(jsTree, BorderLayout.WEST);
 		modelList = new DefaultListModel<>();
 		nodeList = new JList<>(modelList);
-		add(nodeList, BorderLayout.EAST);
+		add(nodeList, BorderLayout.CENTER);
 		setVisible(true);
 	}
 	
-	public void setModel(ArrayList<Node> nodes){
+	public void setModel(ArrayList<String> nodes){
 		modelList.clear();
-		for (Node node : nodes) {
+		for (String node : nodes) {
 			modelList.addElement(node);
 		}
 	}
@@ -70,6 +70,7 @@ public class MainWindow extends JFrame {
 		for (int i = 0; i < root.getNodeList().size(); i++) {
 			createNode(uiRoot, root.getNodeList().get(i));
 		}
+		fillTree();
 	}
 	
 	private void createNode(DefaultMutableTreeNode actual, Node node) {
@@ -84,5 +85,22 @@ public class MainWindow extends JFrame {
 	
 	public String getTextToEnter(){
 		return jtfWord.getText();
+	}
+	
+	public void setJtfWord(){
+		jtfWord.setText("");
+	}
+
+	public void fillTree() {
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+		DefaultMutableTreeNode folder = new DefaultMutableTreeNode("Data");
+		root.add(folder);
+		DefaultMutableTreeNode file = new DefaultMutableTreeNode("file.ext");
+		folder.add(file);
+		DefaultMutableTreeNode otherFolder = new DefaultMutableTreeNode("Folder");
+		folder.add(otherFolder);
+		for (int i = 0; i < jTree.getRowCount(); i++) {
+			jTree.expandRow(i);
+		}
 	}
 }
